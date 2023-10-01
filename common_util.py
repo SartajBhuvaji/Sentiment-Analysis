@@ -8,7 +8,6 @@ from emosent import get_emoji_sentiment_rank
 from emosent import get_emoji_sentiment_rank
 from dotenv import load_dotenv
 
-
 class CommonUtil:
     def __init__(self):
         load_dotenv()
