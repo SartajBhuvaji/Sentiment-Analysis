@@ -13,8 +13,8 @@ class CommonUtil:
         load_dotenv()
         self.YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
         self.MAX_RESULTS = os.getenv("MAX_RESULTS")
-        self.LIKE_WEIGHT = float(os.getenv("LIKE_WEIGHT"))
-        self.EMOJI_WEIGHT = float(os.getenv("EMOJI_WEIGHT"))
+        self.LIKE_WEIGHT = 0.75
+        self.EMOJI_WEIGHT = 0.25
         self.video_id = 'eNZplHsZpvc'
         self.url = f'https://www.googleapis.com/youtube/v3/commentThreads?key={self.YOUTUBE_API_KEY}&textFormat=plainText&part=snippet&videoId={self.video_id}&maxResults={self.MAX_RESULTS}'
 
