@@ -1,4 +1,3 @@
 python-dotenv
 emoji==1.4.1
-pytorch
 transformers
