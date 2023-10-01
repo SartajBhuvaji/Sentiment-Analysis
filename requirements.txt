@@ -3,3 +3,4 @@ emoji==1.4.1
 transformers
 emosent-py
 pandas
+nltk
