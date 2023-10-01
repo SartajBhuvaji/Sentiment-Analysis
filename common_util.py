@@ -65,4 +65,4 @@ class CommonUtil:
             else:
                 emojis_sentiment.append(0)  # Handle the case where there are no valid sentiment scores
         df['emojis_sentiment'] = emojis_sentiment    
-        return df     
+        return df['emojis_sentiment'].mean()
