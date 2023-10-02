@@ -11,6 +11,7 @@ class SentimentAnalysis:
         self.common_util_obj.clean_data()
 
         self.df = self.common_util_obj.df
+        self.EMOJI_WEIGHT = float(self.common_util_obj.EMOJI_WEIGHT)
 
     def _nltk_vader(self):
         # VADER Sentiment Analysis
@@ -31,7 +32,7 @@ class SentimentAnalysis:
     def nltk_vader_sentiment_analysis(self):
         vader_df = self._nltk_vader() 
         vader_emojis_score_df = self.common_util_obj._emojis_sentiment(vader_df)
-        vader_emojis_score_df['total_score'] = vader_emojis_score_df['compound'] + vader_emojis_score_df['emojis_sentiment'] * self.common_util_obj.EMOJI_WEIGHT 
+        vader_emojis_score_df['total_score'] = vader_df['compound'] + vader_emojis_score_df['emojis_sentiment'] * self.EMOJI_WEIGHT
 
         #vader_emojis_score_df['sentiment'] = vader_emojis_score_df['total_score'].apply(lambda x: 'positive' if x > 0 else 'negative')
         #vader_emojis_score_df['sentiment'].value_counts()
