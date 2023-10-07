@@ -1,12 +1,14 @@
 import requests
 import sys
 import re
+import os
 import emoji
 import pandas as pd
 from emosent import get_emoji_sentiment_rank
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-LIKE_WEIGHT = 1.5
-EMOJI_WEIGHT = 1.5
+
+LIKE_WEIGHT = os.getenv("LIKE_WEIGHT")
+EMOJI_WEIGHT = os.getenv("EMOJI_WEIGHT")
 
 class Vader:
     def __init__(self):
