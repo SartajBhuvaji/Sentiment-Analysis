@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="static/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <form method="POST">
+        <input type="text" name="video_url" id="video_url" placeholder="Youtube Video URL">
+        <button type="submit">Submit</button>
+    </form>
+    
+    <!-- Display result here -->
+    <div id="result">
+        {% if result %}
+            <p>Sentiment: {{ result }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 #sentiment_mod.py
 #from nltk.corpus import movie_reviews
 import pickle
-
+import os
 from nltk.classify import ClassifierI
 from statistics import mode
 from nltk.tokenize import word_tokenize
@@ -28,12 +28,13 @@ class VoteClassifier(ClassifierI):
         return conf
 
 # load everything
-documents_f = open("documents.pickle", "rb")
+#print current dir
+documents_f = open("./bag_of_words/documents.pickle", "rb")
 documents = pickle.load(documents_f)
 documents_f.close()
 
 
-word_features5k_f = open("word_feature5k.pickle", "rb")
+word_features5k_f = open("./bag_of_words/word_feature5k.pickle", "rb")
 word_features = pickle.load(word_features5k_f)
 word_features5k_f.close()
 
@@ -45,42 +46,32 @@ def find_features(document):
 
     return features
 
-#featuresets_f = open("featuresets.pickle", "rb")
-#featuresets = pickle.load(featuresets_f)
-#featuresets_f.close()
-
-#random.shuffle(featuresets)
-#print(len(featuresets))
-
-#testing_set = featuresets[10000:]
-#training_set = featuresets[:10000]
-
 #1
-open_file = open("originalnaivebayes5k.pickle", "rb")
+open_file = open("./bag_of_words/originalnaivebayes5k.pickle", "rb")
 classifier = pickle.load(open_file)
 open_file.close()
 
-open_file = open("ComplementNB_classifier5k.pickle", "rb")
+open_file = open("./bag_of_words/ComplementNB_classifier5k.pickle", "rb")
 ComplementNB_classifier = pickle.load(open_file)
 open_file.close()
 
 #2
-open_file = open("MNB_classifier5k.pickle", "rb")
+open_file = open("./bag_of_words/MNB_classifier5k.pickle", "rb")
 MNB_classifier = pickle.load(open_file)
 open_file.close()
 
 #3
-open_file = open("BernoulliNB_classifier5k.pickle", "rb")
+open_file = open("./bag_of_words/BernoulliNB_classifier5k.pickle", "rb")
 BernoulliNB_classifier = pickle.load(open_file)
 open_file.close()
 
 #4
-open_file = open("LogisticRegression_classifier5k.pickle", "rb")
+open_file = open("./bag_of_words/LogisticRegression_classifier5k.pickle", "rb")
 LogisticRegression_classifier = pickle.load(open_file)
 open_file.close()
 
 #5
-open_file = open("LinearSVC_classifier5k.pickle", "rb")
+open_file = open("./bag_of_words/LinearSVC_classifier5k.pickle", "rb")
 LinearSVC_classifier = pickle.load(open_file)
 open_file.close()
 
@@ -100,5 +91,4 @@ def sentiment(text):
 def runner(comment="happy"):
     sentiment_value, confidence = sentiment(comment)
     print(comment, sentiment_value, confidence)
-
-runner()    
+    return sentiment_value 
