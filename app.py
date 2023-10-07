@@ -8,7 +8,6 @@ image_directory = os.path.join(os.getcwd(),'static')
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 MAX_RESULTS = os.getenv("MAX_RESULTS")
 
-
 @app.route("/", methods=["POST", "GET"])
 def home():
     if request.method == "POST":
