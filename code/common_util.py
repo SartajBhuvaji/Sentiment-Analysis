@@ -5,7 +5,6 @@ import emoji
 import requests
 import pandas as pd
 from emosent import get_emoji_sentiment_rank
-from emosent import get_emoji_sentiment_rank
 from dotenv import load_dotenv
 
 import os
@@ -15,7 +14,6 @@ import emoji
 import requests
 import pandas as pd
 from dotenv import load_dotenv
-from emoji_sentiment import get_emoji_sentiment_rank
 
 class CommonUtil:
     """
