@@ -7,8 +7,8 @@ import pandas as pd
 from emosent import get_emoji_sentiment_rank
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-LIKE_WEIGHT = os.getenv("LIKE_WEIGHT")
-EMOJI_WEIGHT = os.getenv("EMOJI_WEIGHT")
+LIKE_WEIGHT = float(os.getenv("LIKE_WEIGHT"))
+EMOJI_WEIGHT = float(os.getenv("EMOJI_WEIGHT"))
 
 class Vader:
     def __init__(self):
@@ -53,7 +53,7 @@ class Vader:
 
     def clean_data(self, df):
         df.drop(columns=['comment'], inplace=True)
-        df['comment_no_emojis'] = df['comment_no_emojis'].str.replace(r'[^a-zA-Z]+', ' ') 
+        df['comment_no_emojis_cleaned'] = df['comment_no_emojis'].str.replace(r'[^a-zA-Z]+', ' ') 
         return df 
     
     def _nltk_vader(self, df):
@@ -62,7 +62,7 @@ class Vader:
         scores = []
         vader_df = df.copy()
 
-        for comment in vader_df['comment_no_emojis']:
+        for comment in vader_df['comment_no_emojis_cleaned']:
             score = sia.polarity_scores(comment)
             scores.append(score)
 
@@ -98,7 +98,6 @@ class Vader:
         vader_df = self._nltk_vader(df)
         vader_emojis_score_df = self._emojis_sentiment(vader_df)
         vader_emojis_score_df['total_score'] = vader_df['compound'] + vader_emojis_score_df['emojis_sentiment'] * EMOJI_WEIGHT
-
         return vader_emojis_score_df['total_score'].mean()
 
     def runner(self, url):
@@ -110,6 +109,7 @@ class Vader:
         df = self.seprate_emojis(df)
         print("seprate emojis done")
         df = self.clean_data(df)
+        clened_comment = df['comment_no_emojis_cleaned']
         print("clean data done")
         value = self.nltk_vader_sentiment_analysis(df)
-        return value
+        return [clened_comment], value

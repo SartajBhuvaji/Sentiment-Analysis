@@ -88,7 +88,7 @@ def sentiment(text):
     feats = find_features(text)
     return voted_classifier.classify(feats),voted_classifier.confidence(feats)
 
-def runner(comment="happy"):
+def runner(comment):
     sentiment_value, confidence = sentiment(comment)
     print(comment, sentiment_value, confidence)
     return sentiment_value 

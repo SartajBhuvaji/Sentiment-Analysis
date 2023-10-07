@@ -17,8 +17,8 @@ def home():
         url = f'https://www.googleapis.com/youtube/v3/commentThreads?key={YOUTUBE_API_KEY}&textFormat=plainText&part=snippet&videoId={video_id}&maxResults={MAX_RESULTS}'
 
         vader_obj = Vader()
-        vader_result = vader_obj.runner(url)
-        bag_of_words_result = bag_of_words.runner()
+        clened_comment, vader_result = vader_obj.runner(url)
+        bag_of_words_result = bag_of_words.runner(clened_comment)
 
         result = f"Vader: {vader_result} \n Bag of Words: {bag_of_words_result}"
         return render_template("index.html", result=result)
