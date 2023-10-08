@@ -2,20 +2,15 @@ import nltk
 import random
 import pickle
 
-#import Fuzzy naive_bayes algos
 from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB, ComplementNB
-
-#importing other algos for better accuracy
 from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.linear_model import LogisticRegression,SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
-#import other libraries
+
 from nltk.classify import ClassifierI
 from statistics import mode
 from nltk.tokenize import word_tokenize
 
-#vote class
-#makes votes
 class VoteClassifier(ClassifierI):
     def __init__(self, *classifiers):
         self._classifiers = classifiers
@@ -36,7 +31,7 @@ class VoteClassifier(ClassifierI):
         choice_votes = votes.count(mode(votes))
         conf = choice_votes / len(votes)
         return conf
-#class ends
+
 
 #read text_files     
 short_pos = open("positive.txt","r").read() #training
@@ -73,12 +68,8 @@ for w in short_pos_words:
 for w in short_neg_words:
     all_words.append(w.lower())
 
-#all_words = nltk.FreqDist(all_words)
-
 #arrange according to frequency
 all_words = nltk.FreqDist(all_words) # FreqDist is tuple, most to lest
-#print(all_words.most_common(15))
-#print(all_words["awesome"])
 
 # words as feeature for learning p12
 word_features = list(all_words.keys())[:5000]
@@ -88,12 +79,10 @@ word_feature5k = open ("word_feature5k.pickle","wb")
 pickle.dump(word_features, word_feature5k)
 word_feature5k.close()
 
-
 #load_pickle
 word_features5k_f = open("word_feature5k.pickle", "rb")
 word_features = pickle.load(word_features5k_f)
 word_features5k_f.close()
-
 
 def find_features(document):
    # words = set(document) # gives lower accuraacy
@@ -103,20 +92,18 @@ def find_features(document):
         features[w] = (w in words)
 
     return features
-#print((find_features(movie_reviews.words('neg/cv000_29416.txt'))))
+
 featuresets = [(find_features(rev), category) for (rev, category) in documents]
 random.shuffle(featuresets)
-#save_pickle
+
 featuresets_f = open ("featuresets.pickle","wb")
 pickle.dump(featuresets, featuresets_f)
 featuresets_f.close()
-
 
 #load_pickle
 featuresets_f = open("featuresets.pickle", "rb")
 featuresets = pickle.load(featuresets_f)
 featuresets_f.close()
-
 
 # set that we'll train our classifier with
 training_set = featuresets[:10000]
@@ -124,27 +111,21 @@ training_set = featuresets[:10000]
 # set that we'll test against.
 testing_set = featuresets[10000:]
 
-#model (nltk)
-#NB
-#basic fuzzy naive 
-
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 print("Original Classifier accuracy percent:",(nltk.classify.accuracy(classifier, testing_set))*100)
 save_classifier = open ("originalnaivebayes5k.pickle","wb")
 pickle.dump(classifier, save_classifier)
 save_classifier.close()
-#loading  81% accuracy
+
 
 classifier_f = open("originalnaivebayes5k.pickle","rb")
 classifier = pickle.load(classifier_f)
 classifier_f.close()
 
-
-# adding scikit-learn 
 MNB_classifier = SklearnClassifier(MultinomialNB())
 MNB_classifier.train(training_set)
 print("MNB_classifier accuracy percent:",(nltk.classify.accuracy(MNB_classifier, testing_set))*100)
-#saving_pickle
+
 MNB_classifier5k = open ("MNB_classifier5k.pickle","wb")
 pickle.dump(MNB_classifier, MNB_classifier5k)
 MNB_classifier5k.close()
@@ -155,15 +136,14 @@ MNB_classifier = pickle.load(open_file)
 open_file.close()
 
 
-
 ComplementNB_classifier = SklearnClassifier(ComplementNB())
 ComplementNB_classifier.train(training_set)
 print("ComplementNB_classifier accuracy percent:",(nltk.classify.accuracy(ComplementNB_classifier, testing_set))*100)
-#save_pickle
+
 ComplementNB_classifier5k = open ("ComplementNB_classifier5k.pickle","wb")
 pickle.dump(ComplementNB_classifier, ComplementNB_classifier5k)
 ComplementNB_classifier5k.close()
-#load_pickle
+
 open_file = open("ComplementNB_classifier5k.pickle", "rb")
 ComplementNB_classifier = pickle.load(open_file)
 open_file.close()
@@ -183,7 +163,6 @@ GaussianNB_classifier = pickle.load(open_file)
 open_file.close()
 '''
 
-
 BernoulliNB_classifier = SklearnClassifier(BernoulliNB())
 BernoulliNB_classifier.train(training_set)
 print("BernoulliNB_classifier accuracy percent:",(nltk.classify.accuracy(BernoulliNB_classifier, testing_set))*100)
@@ -195,7 +174,6 @@ BernoulliNB_classifier5k.close()
 open_file = open("BernoulliNB_classifier5k.pickle", "rb")
 BernoulliNB_classifier = pickle.load(open_file)
 open_file.close()
-
 
 LogisticRegression_classifier = SklearnClassifier(LogisticRegression())
 LogisticRegression_classifier.train(training_set)
@@ -221,11 +199,10 @@ open_file = open("LinearSVC_classifier5k.pickle", "rb")
 LinearSVC_classifier = pickle.load(open_file)
 open_file.close()
 
-
 voted_classifier = VoteClassifier(classifier,
                                   ComplementNB_classifier,    
                                   MNB_classifier,
-                                 #BernoulliNB_classifier,
+                                 #BernoulliNB_classifier, #not good
                                   LogisticRegression_classifier,
                                   LinearSVC_classifier
                                   )

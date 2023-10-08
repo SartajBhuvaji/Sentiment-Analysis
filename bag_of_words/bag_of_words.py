@@ -25,8 +25,6 @@ class VoteClassifier(ClassifierI):
         conf = choice_votes / len(votes)
         return conf
 
-# load everything
-#print current dir
 documents_f = open("./bag_of_words/documents.pickle", "rb")
 documents = pickle.load(documents_f)
 documents_f.close()

@@ -1,11 +1,20 @@
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg') # this is so that matplotlib doesn't try to open a window #mustbe used for flask
 import numpy as np
 import matplotlib.pyplot as plt
 
 def draw_color_strip(value, filename):
+    """
+    Draw a color strip plot with a vertical line indicating the given value.
 
-    value = max(-1, min(1, value))  # Ensure value is within the range [-1, 1]
+    Parameters:
+    value (float): The value to indicate with a vertical line.
+    filename (str): The name of the file to save the plot as.
+
+    Returns:
+    None
+    """
+    value = max(-1, min(1, value)) 
     gradient = np.linspace(-1, 1, 256).reshape(1, -1)
     gradient = np.vstack((gradient, gradient))
     fig, ax = plt.subplots(figsize=(8, 2))

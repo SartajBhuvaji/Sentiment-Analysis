@@ -1,0 +1,9 @@
+flask
+emoji
+pandas
+emosent
+pandas
+numpy
+pickle
+sklearn
+matplotlib
