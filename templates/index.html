@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link href="static/css/style.css" rel="stylesheet" />
+    <title>Sentiment Analysis</title>
+    <link href="static/css/style.css" rel="stylesheet" />   
 </head>
 <body>
+    <div id = "page">
+    <h1>Sentiment Analysis</h1>
     <form method="POST">
-        <input type="text" name="video_url" id="video_url" placeholder="Youtube Video URL">
+        <input type="text" name="video_url" id="video_url" placeholder="YouTube Video URL">
         <button type="submit">Submit</button>
     </form>
     
@@ -19,5 +20,6 @@
             <p>Sentiment: {{ result }}</p>
         {% endif %}
     </div>
+</div>
 </body>
 </html>
