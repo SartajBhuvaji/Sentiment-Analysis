@@ -1,5 +1,3 @@
-#sentiment_mod.py
-#from nltk.corpus import movie_reviews
 import pickle
 import os
 from nltk.classify import ClassifierI

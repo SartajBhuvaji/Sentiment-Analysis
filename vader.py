@@ -74,15 +74,6 @@ class Vader:
 
 
     def _emojis_sentiment(self, df):
-        """
-        Calculates the sentiment score of emojis in the emojis column of the given DataFrame.
-
-        Args:
-        df (pandas.DataFrame): The DataFrame containing the emojis column.
-
-        Returns:
-        pandas.DataFrame: The input DataFrame with an additional emojis_sentiment column containing the sentiment scores of the emojis.
-        """
         emojis_sentiment = []
         for emojis in df['emojis']:
             sentiment_scores = [get_emoji_sentiment_rank(emoji) for emoji in emojis]
