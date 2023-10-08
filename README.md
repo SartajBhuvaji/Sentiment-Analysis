@@ -5,6 +5,12 @@ Performing Sentiment Analysis on Youtube Videos
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)](https://www.python.org/downloads/)
 
+
+## Demo
+https://user-images.githubusercontent.com/58986949/115314310-805b2780-a1a7-11eb-8558-648a367ea231.mp4
+
+
+
 ## Table of Contents
 
 - [About](#about)
