@@ -43,7 +43,6 @@ def find_features(document):
     features = {}
     for w in word_features:
         features[w] = (w in words)
-
     return features
 
 #1
@@ -89,6 +88,13 @@ def sentiment(text):
     return voted_classifier.classify(feats),voted_classifier.confidence(feats)
 
 def runner(comment):
-    sentiment_value, confidence = sentiment(comment)
-    print(comment, sentiment_value, confidence)
-    return sentiment_value 
+    total_conf = 0
+    total_sent = 0
+    for sentences in comment:
+        for sentence in sentences:
+            sentence_text = sentence
+            sentence_text = sentence_text.replace(r'[^a-zA-Z]+', ' ')
+            sentiment_value, confidence = sentiment(sentence_text)
+            total_conf += confidence
+            total_sent +=1
+    return total_conf/total_sent       

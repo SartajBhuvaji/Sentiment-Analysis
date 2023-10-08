@@ -18,8 +18,9 @@ def home():
 
         vader_obj = Vader()
         clened_comment, vader_result = vader_obj.runner(url)
+        print(type(clened_comment))
+        #print("CLEANEDD COMMENTS \n", clened_comment)
         bag_of_words_result = bag_of_words.runner(clened_comment)
-
         result = f"Vader: {vader_result} \n Bag of Words: {bag_of_words_result}"
         return render_template("index.html", result=result)
     else:
