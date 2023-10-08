@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from vader import Vader 
 import bag_of_words.bag_of_words as bag_of_words
+from draw_plot import draw_color_strip
 
 app = Flask(__name__)
 image_directory = os.path.join(os.getcwd(),'static')
@@ -21,8 +22,15 @@ def home():
         print(type(clened_comment))
         #print("CLEANEDD COMMENTS \n", clened_comment)
         bag_of_words_result = bag_of_words.runner(clened_comment)
-        result = f"Vader: {vader_result} \n Bag of Words: {bag_of_words_result}"
-        return render_template("index.html", result=result)
+        #result = f"Vader: {vader_result} \n Bag of Words: {bag_of_words_result}"
+        #return render_template("index.html", result=result)
+
+        draw_color_strip(vader_result, 'vader_result')
+        draw_color_strip(bag_of_words_result, 'bag_of_words_result')
+
+        vader_image_path = '/static/images/vader_result.png'
+        bag_of_words_image_path = '/static/images/bag_of_words_result.png'
+        return render_template("index.html", vader_image_path=vader_image_path, bag_of_words_image_path=bag_of_words_image_path)
     else:
         return render_template("index.html")
     

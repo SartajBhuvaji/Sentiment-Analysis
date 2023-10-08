@@ -11,15 +11,18 @@
     <h1>Sentiment Analysis</h1>
     <form method="POST">
         <input type="text" name="video_url" id="video_url" placeholder="YouTube Video URL">
-        <button type="submit">Submit</button>
+        <br>
+        <button type="submit" >Submit</button>
     </form>
-    
+    <br>
+    <br>
+    <br>
     <!-- Display result here -->
-    <div id="result">
-        {% if result %}
-            <p>Sentiment: {{ result }}</p>
-        {% endif %}
+    {% if vader_image_path %}
+        <img src="{{ vader_image_path }}" alt="vader_image_path" style="width: 300px; height: 100px">
+        <img src="{{ bag_of_words_image_path }}" alt="bag_of_words_image_path" style="width: 300px; height: 100px;">
+    {% endif %}
+
     </div>
-</div>
 </body>
 </html>
