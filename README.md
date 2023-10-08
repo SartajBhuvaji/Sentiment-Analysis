@@ -7,7 +7,7 @@ Performing Sentiment Analysis on Youtube Videos
 
 
 ## Demo
-https://github.com/SartajBhuvaji/Sentiment-Analysis/blob/main/_github_readme/Demo_video.mp4
+https://github.com/SartajBhuvaji/Sentiment-Analysis/blob/main/_github_readme/Demo_video_compressed.mp4
 
 
 
