@@ -7,8 +7,9 @@ Performing Sentiment Analysis on Youtube Videos
 
 
 ## Demo
-https://github.com/SartajBhuvaji/Sentiment-Analysis/blob/main/_github_readme/Demo_video_compressed.mp4
 
+
+https://github.com/SartajBhuvaji/Sentiment-Analysis/assets/31826483/fe704efc-0942-4833-aa54-6748ed68df15
 
 
 ## Table of Contents
@@ -71,5 +72,15 @@ python app.py
 
 ### Launching the application
 - Go to `http://127.0.0.1:5000/`
+
+## Screenshots
+- File 1
+![sc_1](https://github.com/SartajBhuvaji/Sentiment-Analysis/assets/31826483/13c2c0f2-c1e4-4727-b984-ab87d058e281)
+
+- File 2
+![sc_2](https://github.com/SartajBhuvaji/Sentiment-Analysis/assets/31826483/279d0a6d-0ce4-43b6-a1b3-9c139401a247)
+
+
+
 
 
